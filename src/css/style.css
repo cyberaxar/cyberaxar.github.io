@@ -104,10 +104,6 @@ body {
     z-index: 9999;
 }
 
-.nav.open {
-    width: 250px;
-    /* Fixed width for desktop */
-}
 
 a,
 .nav p {
@@ -151,7 +147,7 @@ a,
 
 .article {
     width: 100%;
-     background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     /* 60% opacity black */
     backdrop-filter: blur(2px);
     /* optional, adds nice blur effect behind */
@@ -159,7 +155,7 @@ a,
 
 .section {
     margin-bottom: 1.25rem;
-    
+
 }
 
 .section h3 {
@@ -212,7 +208,7 @@ a,
     font-size: 1.1rem;
     line-height: 30px;
     padding: 20px;
-   
+
 }
 
 .description p {
@@ -236,10 +232,12 @@ a,
         text-align: center;
     }
 
-    .nav.open {
-        width: 100%;
-        /* full screen nav for mobile */
+    .aboutMe figure img {
+        width: 250px;
+        height: auto;
+        border-radius: 50%;
     }
+
 }
 
 /* ================= Aside ================= */
@@ -283,7 +281,7 @@ a,
     line-height: 30px;
     margin-bottom: 10px;
     padding: 20px;
-   
+
 }
 
 .note h3,
