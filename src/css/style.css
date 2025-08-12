@@ -1,0 +1,301 @@
+/* ================= Reset & Base Styles ================= */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    max-width: 100%;
+
+    /* Layout: vertical stacking */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    /* Typography */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #fff;
+    background: url("../pic/wallpapers/processor_1.jpg") center center / cover no-repeat fixed;
+
+    /* Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================= Variables ================= */
+:root {
+    --color-white: #fff;
+    --color-black-overlay: rgba(0, 0, 0, 0.95);
+    --color-primary-gradient-start: rgb(100, 15, 180);
+    --color-primary-gradient-end: rgb(117, 5, 182);
+    --transition-speed: 0.3s;
+}
+
+/* ================= Header ================= */
+
+.header {
+
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 60% opacity black */
+    backdrop-filter: blur(2px);
+    /* optional, adds nice blur effect behind */
+    color: var(--color-white);
+    user-select: none;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+/* ================= Menu Icon (Hamburger) ================= */
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 5px;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.menu span {
+    width: 20px;
+    height: 3.5px;
+    background-color: var(--color-white);
+    border-radius: 2px;
+    display: block;
+}
+
+/* ================= Navigation ================= */
+
+.nav {
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 60% opacity black */
+    backdrop-filter: blur(5px);
+    /* optional, adds nice blur effect behind */
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: width var(--transition-speed) ease;
+    z-index: 9999;
+}
+
+.nav.open {
+    width: 250px;
+    /* Fixed width for desktop */
+}
+
+a,
+.nav p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    margin: 0.3rem 0.4rem;
+    padding: 0 0.5rem;
+    background: linear-gradient(-45deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.nav a:hover,
+.nav a:focus,
+.nav p:hover {
+    background: linear-gradient(-45deg, var(--color-primary-gradient-end), var(--color-primary-gradient-start));
+    outline: none;
+    transform: scale(1.05);
+}
+
+/* ================= Main Content ================= */
+
+.main {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* ================= Article & Sections ================= */
+
+.article {
+    width: 100%;
+}
+
+.section {
+    margin-bottom: 1.25rem;
+}
+
+.section h3 {
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 0.625rem;
+    text-align: center;
+}
+
+/* ================= About Me Section ================= */
+
+.aboutMe {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    width: 100%;
+    color: var(--color-white);
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 60% opacity black */
+    backdrop-filter: blur(2px);
+    /* optional, adds nice blur effect behind */
+}
+
+
+.aboutMe figure {
+    margin: 0;
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.aboutMe figure img {
+    width: 250px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.aboutMe figcaption {
+    font-size: 1.5rem;
+    margin-top: 0.625rem;
+    font-weight: 600;
+    color: var(--color-white);
+}
+
+/* Description next to image */
+.description {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 30px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 60% opacity black */
+    backdrop-filter: blur(2px);
+    /* optional, adds nice blur effect behind */
+}
+
+.description p {
+    margin-bottom: 10px;
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 768px) {
+    .aboutMe {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .aboutMe figure {
+        flex: none;
+        margin-bottom: 1rem;
+    }
+
+    .aboutMe .description {
+        text-align: center;
+    }
+
+    .nav.open {
+        width: 100%;
+        /* full screen nav for mobile */
+    }
+}
+
+/* ================= Aside ================= */
+
+.aside {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+/* ================= Footer ================= */
+
+.footer {
+    width: 100%;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 60% opacity black */
+    backdrop-filter: blur(2px);
+    /* optional, adds nice blur effect behind */
+    /* professional dark red */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #eee;
+    user-select: none;
+}
+
+/* ============== More ============== */
+
+.highlight {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.note {
+    font-size: 18px;
+    line-height: 30px;
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 60% opacity black */
+    backdrop-filter: blur(2px);
+}
+
+.note h3,
+.note h1,
+.note h2 {
+    padding: 10px;
+}
+
+.center-content {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
