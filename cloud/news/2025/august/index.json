@@ -4,11 +4,54 @@
       "title": "Welcome to My New Website",
       "summary": "Today marks the launch of my personal website! Here, I will share my journey, projects, and thoughts on programming and technology.",
       "author": "Axar",
-      "path": "/cloud/news/2025/aug/data/welcome_post.txt",
+      "path": "./cloud/news/2025/august/data/welcome.txt",
       "cover": {
         "type": "image",
         "image": {
           "src": "./src/pic/wallpapers/rain_1.jpg",
+          "alt": "Welcome to My New Website"
+        }
+      },
+      "keywords": [
+        {
+          "type": "text",
+          "text": "website launch"
+        },
+        {
+          "type": "text",
+          "text": "new website"
+        },
+        {
+          "type": "text",
+          "text": "personal website"
+        },
+        {
+          "type": "text",
+          "text": "technology"
+        },
+        {
+          "type": "text",
+          "text": "programming journey"
+        },
+        {
+          "type": "text",
+          "text": "Axar"
+        },
+        {
+          "type": "question",
+          "text": "Why did I create this website?"
+        }
+      ]
+    },
+      {
+      "title": "New Rain",
+      "summary": "Today marks the launch of my personal website! Here, I will share my journey, projects, and thoughts on programming and technology.",
+      "author": "Axar",
+      "path": "/cloud/news/2025/august/data/welcome.txt",
+      "cover": {
+        "type": "image",
+        "image": {
+          "src": "./src/pic/wallpapers/rain_4.jpg",
           "alt": "Welcome to My New Website"
         }
       },

@@ -244,10 +244,9 @@ class App {
   };
 }
 
-// =========
-
-
+// ============
 class AxarNews {
+  // Private fields
   #isMenuOpen = false;
   #currentPage = 1;
   #itemsPerPage = 3;
@@ -255,7 +254,7 @@ class AxarNews {
   #totalPosts = 0;
   #activeYear = null;
   #activeMonth = null;
-  #activeTopic = "news";
+  #activeTopic = "news";  // Default topic is news
   #availabilityMap = {};
 
   // DOM Elements
@@ -284,11 +283,10 @@ class AxarNews {
     this.#setupAccessibility();
   }
 
-
   // Fetch the availability map (list of available years and months)
   async #fetchAvailabilityMap() {
     try {
-      const res = await fetch(`/cloud/${this.#activeTopic}.json?v=${Date.now()}`);
+      const res = await fetch(`/cloud/${this.#activeTopic}/news.json?v=${Date.now()}`);
       if (!res.ok) throw new Error("Failed to fetch availability map");
       const data = await res.json();
       this.#availabilityMap = data;
@@ -301,7 +299,7 @@ class AxarNews {
 
   // Find the latest year and month data
   async #findLatestYearMonth() {
-    const monthOrder = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monthOrder = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     const years = Object.keys(this.#availabilityMap).sort((a, b) => b - a);
 
     for (const year of years) {
@@ -332,7 +330,7 @@ class AxarNews {
       this.#activeYear = year;
       this.#activeMonth = month;
 
-      const url = `/cloud/${this.#activeTopic}/${year}/${month}/index.json?v=${Date.now()}`;
+      const url = `/cloud/${this.#activeTopic}/${this.#activeYear}/${this.#activeMonth}/index.json?v=${Date.now()}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error("Failed to load posts list");
 
@@ -379,20 +377,20 @@ class AxarNews {
         media = `<img src="${post.cover.image.src}" alt="${post.cover.image.alt}" loading="lazy" height="200px" />`;
       } else if (post.cover.type === "video") {
         media = `<video controls preload="metadata" poster="${post.cover.video.poster || ""}">
-          <source src="${post.cover.video.src}" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>`;
+                    <source src="${post.cover.video.src}" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>`;
       }
     }
 
     return `
-      <div class="card" tabindex="0" aria-label="Post titled ${post.title}">
-        ${media}
-        <h3>${post.title}</h3>
-        <p>${post.summary}</p>
-        <button class="read-more-button" aria-label="Read more about ${post.title}" onclick="axarnews.openPost('${post.path}')">Read More</button>
-      </div>
-    `;
+            <div class="card" tabindex="0" aria-label="Post titled ${post.title}">
+                ${media}
+                <h3>${post.title}</h3>
+                <p>${post.summary}</p>
+                <button class="read-more-button" aria-label="Read more about ${post.title}" onclick="axarnews.openPost('${post.path}')">Read More</button>
+            </div>
+        `;
   }
 
   // Update the pagination
@@ -403,25 +401,40 @@ class AxarNews {
   }
 
   // Open the full post
-  async openPost(path) {
-    this.#showLoading(this.#fullPostContainer);
-    this.#hideElement(this.#postsContainer);
-    this.#showElement(this.#fullPostContainer);
-    this.#showElement(this.#backBtn);
+  // Open the full post
+// Open the full post
+async openPost(path) {
+  this.#showLoading(this.#fullPostContainer);
+  this.#hideElement(this.#postsContainer);
+  this.#showElement(this.#fullPostContainer);
+  this.#showElement(this.#backBtn);
 
-    try {
-      const res = await fetch(`${path}?v=${Date.now()}`);
-      if (!res.ok) throw new Error("Failed to fetch full post");
-      const content = await res.text();
+  // Base path should be just `/cloud/news/${this.#activeYear}/${this.#activeMonth}/data/`
+  const basePath = `/cloud/${this.#activeTopic}/${this.#activeYear}/${this.#activeMonth}/data/`;
 
-      this.#fullPostContainer.innerHTML = `<article class="full-post" tabindex="0">${content}</article>`;
-      window.scrollTo({ top: 0, behavior: "smooth" });
+  // Ensure we remove './' if it's part of the path
+  const postPath = path.startsWith('./') ? path.slice(2) : path;
 
-    } catch (e) {
-      console.error("Error loading full post:", e);
-      this.#fullPostContainer.innerHTML = `<p style="color:red; padding:1rem;">Failed to load content. Please try again later.</p>`;
-    }
+  // Construct the full URL for the post content
+  const fullPostUrl = basePath + postPath;
+
+  console.log(`Fetching full post from: ${fullPostUrl}`); // Debugging: Check the final URL
+
+  try {
+    const res = await fetch(fullPostUrl);
+    if (!res.ok) throw new Error(`Failed to fetch full post from: ${fullPostUrl}`);
+    const content = await res.text();
+
+    // Insert the content of the post into the full post container
+    this.#fullPostContainer.innerHTML = `<article class="full-post" tabindex="0">${content}</article>`;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+  } catch (e) {
+    console.error("Error loading full post:", e);
+    this.#fullPostContainer.innerHTML = `<p style="color:red; padding:1rem;">Failed to load content. Please try again later.</p>`;
   }
+}
+
 
   // Go back to the post list view
   goBack() {
@@ -458,11 +471,11 @@ class AxarNews {
   // Show loading spinner
   #showLoading(container) {
     container.innerHTML = `
-      <div role="status" aria-live="polite" style="text-align:center; padding:2rem;">
-        <span class="spinner" aria-hidden="true"></span>
-        Loading...
-      </div>
-    `;
+            <div role="status" aria-live="polite" style="text-align:center; padding:2rem;">
+                <span class="spinner" aria-hidden="true"></span>
+                Loading...
+            </div>
+        `;
   }
 
   // Hide elements
@@ -495,13 +508,22 @@ class AxarNews {
   }
 }
 
-
-// Usage example:
-document.addEventListener("DOMContentLoaded", () => {
+// Usage
+document.addEventListener('DOMContentLoaded', function () {
   const axarnews = new AxarNews({ itemsPerPage: 3 });
   axarnews.initialize();
+  window.axarnews = axarnews;
 });
 
+// Usage
+document.addEventListener('DOMContentLoaded', function () {
+  const axarnews = new AxarNews({ itemsPerPage: 3 });
+  axarnews.initialize();
+  window.axarnews = axarnews;
+});
+
+
+// ===========
 
 const app = new App();
 window.app = app;
