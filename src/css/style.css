@@ -249,7 +249,7 @@ body {
 /* ================= Quote ================= */
 
 .quote {
-    min-height: 300px;
+    min-height: 200px;
     width: 100%;
     margin: 1rem auto 3rem;
     padding: 20px;
@@ -285,8 +285,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 200;
-    /* fixed or min height to keep vertical space */
     width: 100%;
     text-align: center;
     color: var(--color-white);
