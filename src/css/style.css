@@ -93,9 +93,7 @@ body {
     z-index: 9999;
 }
 
-.nav a,
-.nav p,
-.aside a {
+.button-link {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,6 +140,15 @@ body {
 
 .section {
     margin-bottom: 1.25rem;
+}
+
+.note {
+    line-height: 30px;
+    padding: 20px;
+}
+
+.highlight {
+    font-weight: bold;
 }
 
 .section h3 {
@@ -304,6 +311,7 @@ body {
     width: 50px;
     padding: 0.5rem;
 }
+
 .slide-footer {
     display: flex;
     justify-content: center;
