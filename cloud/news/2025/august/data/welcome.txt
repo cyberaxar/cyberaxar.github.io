@@ -1,1 +1,9 @@
-<h1> rainy season </h1>
+<h1>Welcome to My Website</h1>
+
+<p>Hello, and welcome! This is my personal website, <a href='https://cyberaxar.github.io' class='link-button'>cyberaxar</a>. Here, I share my experiences, thoughts, and ideas. You will find a variety of content, including insights into the tech world, personal stories, and useful knowledge about different aspects of programming and technology. I launched this website in August, and I plan to keep adding new content, such as the latest news in tech and other interesting things. Additionally, you will find information about the books I write, along with download links for those books.</p>
+
+<p>Ever since I was a child, I've had a strong interest in computers. Back then, it was all about playing games, but now it's because I can do so much more with them. Today, the world depends heavily on computers, and learning these skills is not as difficult as it may seem. If you have curiosity and passion, you can learn anything about the tech world.</p>
+
+<p>Although I completed my education up to high school, I couldn't pursue a degree in BCA due to financial constraints. So, I chose to work and support myself. However, my interest in computers and technology never faded. This website is a result of that passion. Not only have I created this website, but I am also planning to write a lot of content related to technology, particularly books on programming languages like C++, C#, JavaScript, and topics related to Linux such as basic Linux usage, networking, cybersecurity, and game development.</p>
+
+<p>The internet is a vast ocean of knowledge, and it holds everything you need. By carefully selecting the right resources, you can build your career in the field that excites you the most. You just need curiosity, dedication, and the right mindset to explore the endless possibilities that technology has to offer.</p>

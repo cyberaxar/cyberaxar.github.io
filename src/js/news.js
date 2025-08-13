@@ -131,7 +131,7 @@ export class News {
 
         // Read More Button
         const readMoreButton = document.createElement('button');
-        readMoreButton.textContent = 'Read More';
+        readMoreButton.textContent = 'More';
         readMoreButton.classList.add('read-more-btn');
         readMoreButton.onclick = () => this.loadFullArticle(article);
 
