@@ -148,17 +148,17 @@
             </section>
         </article>
 
-        <article class="news-article">
 
-            <section id="blog-container"></section>
-            <section id="fullBlogContainer"></section>
-            <button id="prev"></button>
-            <button id="next"></button>
-            <section id="page-info"></section>
-            <button id="back-button"></button>
-
+        <article class="news">
+            <section class="news-list" id="newsList">
+                <!-- List of news articles will be dynamically loaded here -->
+            </section>
+            <section class="navigation">
+                <button id="backButton" class="button" style="display:none;">Back</button>
+                <div class="page-info" id="pageInfo"></div>
+                <button id="nextButton" class="button">Next</button>
+            </section>
         </article>
-
 
 
         <aside class="aside">
@@ -187,4 +187,5 @@
 
 </body>
 <script src="src/js/app.js" type="module"></script>
+
 </html>
