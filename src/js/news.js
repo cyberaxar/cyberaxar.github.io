@@ -83,8 +83,7 @@ export class News {
         });
     }
 
-    // Create the HTML for an individual article
-   createArticleElement(article) {
+  createArticleElement(article) {
     const articleElement = document.createElement('div');
     articleElement.classList.add('news-article');
 
@@ -96,10 +95,15 @@ export class News {
     const articleSummary = document.createElement('p');
     articleSummary.textContent = article.summary;
 
-    // Author Name
+    // Author Name (as a clickable link)
     const articleAuthor = document.createElement('p');
     articleAuthor.classList.add('article-author');
-    articleAuthor.textContent = `By ${article.author}`;
+    
+    // Create the author link
+    const authorLink = document.createElement('a');
+    authorLink.href = `https://cyberaxar.github.io/home/about/about.html`;  // Link to the author's page
+    authorLink.textContent = `By ${article.author}`;  // Author's name, can be dynamically set
+    articleAuthor.appendChild(authorLink);  // Append the link to the author paragraph
 
     // Article Cover (Image or Video)
     const articleCover = document.createElement('div');
@@ -127,12 +131,12 @@ export class News {
     articleElement.appendChild(articleCover);
     articleElement.appendChild(articleTitle);
     articleElement.appendChild(articleSummary);
-    articleElement.appendChild(articleAuthor);
-    // Removed the keywords section
+    articleElement.appendChild(articleAuthor);  // Append the article author with the link
     articleElement.appendChild(readMoreButton);
 
     return articleElement;
 }
+
 
 
 
