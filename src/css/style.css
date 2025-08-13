@@ -488,6 +488,11 @@ body {
     margin-top: 20px;
 }
 
+#nextButton {
+    height: 40px;
+    width: 100px;
+}
+
 .page-info {
     font-size: 1.2em;
     color: #ddd;
