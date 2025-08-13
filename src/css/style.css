@@ -399,81 +399,123 @@ body {
     text-align: center;
 }
 
-/* =========== News ========== */
-/* News Section Styles */
+
+/* =========== News Section Styles ========== */
 .news {
-    margin-top: 100px;
+    margin-top: 80px;
+    /* Adjusted margin for cleaner layout */
+    padding: 20px;
 }
 
+/* Article Styles */
 .news-article {
     width: 100%;
-    margin-bottom: 10px;
-    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
 
+.news-article:hover {
+    transform: translateY(-5px);
+    /* Subtle lift effect on hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
 /* Cover Image */
 .article-cover {
     width: 100%;
-    align-items: center;
+    display: flex;
     justify-content: center;
+    margin-bottom: 15px;
 }
 
 .article-cover img {
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
     height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    /* Ensures the image fills its container */
 }
 
 /* Title and Summary */
 .news-article h3 {
-    font-size: 1.6em;
+    font-size: 1.8em;
     font-weight: bold;
-    color: white;
+    color: #fff;
     padding: 10px;
     text-align: center;
+    margin-bottom: 10px;
+    line-height: 1.3;
 }
 
 .news-article p {
     font-size: 1em;
-    color: white;
+    color: #ddd;
     text-align: justify;
+    line-height: 1.7;
+    margin-bottom: 15px;
 }
 
 /* Author Name */
 .article-author {
     font-size: 1em;
-    color: yellow;
+    color: #f4c542;
+    /* A more professional gold tone */
     padding: 10px 15px;
-    margin-top: -10px;
+    margin-top: -5px;
     text-align: left;
+    font-style: italic;
 }
 
-.navigation,
-.page-info {
-    height: 100px;
+/* Navigation Bar and Page Info */
+.navigation {
+    height: 60px;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
+.page-info {
+    font-size: 1.2em;
+    color: #ddd;
+    text-align: center;
+}
 
 /* Read More Button */
 .read-more-btn {
-    height: 40px;
-    width: 100px;
-    display: block;
+    height: 45px;
+    width: 120px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1.1em;
+    font-weight: 600;
     text-align: center;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
+    background-color: #007BFF;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.read-more-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.read-more-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
 }
 
 /* Container to hold Articles */
@@ -481,14 +523,71 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 }
 
+/* Full Article */
 .full-article {
     width: 100%;
-    padding: 20px;
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .full-article p {
-    line-height: 30px;
+    line-height: 1.8;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.full-article h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Back Button inside Full Article */
+.full-article .read-more-btn {
+    background-color: #28a745;
+    /* Green for back action */
+    margin-top: 20px;
+}
+
+.full-article .read-more-btn:hover {
+    background-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .news {
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    .news-article {
+        padding: 15px;
+    }
+
+    .article-cover img {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .news-article h3 {
+        font-size: 1.4em;
+    }
+
+    .news-article p {
+        font-size: 0.9em;
+    }
+
+    .read-more-btn {
+        width: 100px;
+    }
+
+    #newsList {
+        gap: 15px;
+    }
 }

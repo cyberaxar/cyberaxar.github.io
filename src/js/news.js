@@ -84,67 +84,56 @@ export class News {
     }
 
     // Create the HTML for an individual article
-    createArticleElement(article) {
-        const articleElement = document.createElement('div');
-        articleElement.classList.add('news-article');
+   createArticleElement(article) {
+    const articleElement = document.createElement('div');
+    articleElement.classList.add('news-article');
 
-        // Article Title
-        const articleTitle = document.createElement('h3');
-        articleTitle.textContent = article.title;
+    // Article Title
+    const articleTitle = document.createElement('h3');
+    articleTitle.textContent = article.title;
 
-        // Article Summary
-        const articleSummary = document.createElement('p');
-        articleSummary.textContent = article.summary;
+    // Article Summary
+    const articleSummary = document.createElement('p');
+    articleSummary.textContent = article.summary;
 
-        // Author Name
-        const articleAuthor = document.createElement('p');
-        articleAuthor.classList.add('article-author');
-        articleAuthor.textContent = `By ${article.author}`;
+    // Author Name
+    const articleAuthor = document.createElement('p');
+    articleAuthor.classList.add('article-author');
+    articleAuthor.textContent = `By ${article.author}`;
 
-        // Keywords - Displaying a list of keywords
-        const keywordsContainer = document.createElement('div');
-        keywordsContainer.classList.add('keywords');
-        article.keywords.forEach(keyword => {
-            if (keyword.type === 'text') {
-                const keywordElement = document.createElement('span');
-                keywordElement.classList.add('keyword');
-                keywordElement.textContent = keyword.text;
-                keywordsContainer.appendChild(keywordElement);
-            }
-        });
+    // Article Cover (Image or Video)
+    const articleCover = document.createElement('div');
+    articleCover.classList.add('article-cover');
 
-        // Article Cover (Image or Video)
-        const articleCover = document.createElement('div');
-        articleCover.classList.add('article-cover');
-
-        if (article.cover && article.cover.type === 'image') {
-            const img = document.createElement('img');
-            img.src = article.cover.image.src;
-            img.alt = article.cover.image.alt;
-            articleCover.appendChild(img);
-        } else if (article.cover && article.cover.type === 'video') {
-            const video = document.createElement('video');
-            video.src = article.cover.video.src;
-            video.controls = true;
-            articleCover.appendChild(video);
-        }
-
-        // Read More Button
-        const readMoreButton = document.createElement('button');
-        readMoreButton.textContent = 'More';
-        readMoreButton.classList.add('read-more-btn');
-        readMoreButton.onclick = () => this.loadFullArticle(article);
-
-        // Append all elements
-        articleElement.appendChild(articleCover);
-        articleElement.appendChild(articleTitle);
-        articleElement.appendChild(articleSummary);
-        articleElement.appendChild(articleAuthor);
-        articleElement.appendChild(keywordsContainer);
-        articleElement.appendChild(readMoreButton);
-
-        return articleElement;
+    if (article.cover && article.cover.type === 'image') {
+        const img = document.createElement('img');
+        img.src = article.cover.image.src;
+        img.alt = article.cover.image.alt;
+        articleCover.appendChild(img);
+    } else if (article.cover && article.cover.type === 'video') {
+        const video = document.createElement('video');
+        video.src = article.cover.video.src;
+        video.controls = true;
+        articleCover.appendChild(video);
     }
+
+    // Read More Button
+    const readMoreButton = document.createElement('button');
+    readMoreButton.textContent = 'More';
+    readMoreButton.classList.add('read-more-btn');
+    readMoreButton.onclick = () => this.loadFullArticle(article);
+
+    // Append all elements
+    articleElement.appendChild(articleCover);
+    articleElement.appendChild(articleTitle);
+    articleElement.appendChild(articleSummary);
+    articleElement.appendChild(articleAuthor);
+    // Removed the keywords section
+    articleElement.appendChild(readMoreButton);
+
+    return articleElement;
+}
+
 
 
     // Load full article content when "Read More" is clicked
@@ -159,26 +148,38 @@ export class News {
         newsListContainer.innerHTML = '';
 
         try {
+            // Fetch the full article content
             const articleContent = await fetch(article.path);
             const articleText = await articleContent.text();
 
+            // Create a container for the full article
             const fullArticle = document.createElement('div');
             fullArticle.classList.add('full-article');
+
+            // Create the "Back" button inside the article
+            const backButtonInArticle = document.createElement('button');
+            backButtonInArticle.textContent = 'Back to List';
+            backButtonInArticle.classList.add('read-more-btn');
+            backButtonInArticle.onclick = () => this.goBackToList(); // Go back to the list
+
+            // Add the article title and content
             fullArticle.innerHTML = `<h2>${article.title}</h2><p>${articleText}</p>`;
 
+            // Append the "Back" button inside the article content
+            fullArticle.appendChild(backButtonInArticle);
             newsListContainer.appendChild(fullArticle);
+
         } catch (error) {
             console.error('Error loading full article:', error);
             this.showErrorMessage('Failed to load the article. Please try again later.');
         }
 
-        // Show "Back" button, hide "Next"
-        backButton.style.display = 'block';
-        nextButton.style.display = 'none';
-
-        // Update page info
-        pageInfo.textContent = `Viewing: ${article.title}`;
+        // Hide "Next" button and show "Back to List" button inside the article
+        backButton.style.display = 'none'; // Hide the outside "Back" button
+        nextButton.style.display = 'none'; // Hide the "Next" button
+        pageInfo.textContent = `Viewing: ${article.title}`; // Show page info
     }
+
 
     // Handle the "Back" button to return to the news list
     goBackToList() {
@@ -188,14 +189,15 @@ export class News {
         const pageInfo = document.getElementById('pageInfo');
         const newsListContainer = document.getElementById('newsList');
 
-        // Re-render the news list
+        // Re-render the news list (this will bring back the list of articles)
         this.renderNewsList(this.articles.slice(0, 10));
 
-        // Hide the "Back" button and show "Next"
-        backButton.style.display = 'none';
-        nextButton.style.display = 'block';
+        // Show the "Back" button and "Next" button for pagination
+        backButton.style.display = 'none'; // "Back" button outside remains hidden
+        nextButton.style.display = 'block'; // Show the "Next" button
         pageInfo.textContent = ''; // Clear page info
     }
+
 
     // Handle the "Next" button (e.g., for pagination)
     loadNextPage() {
