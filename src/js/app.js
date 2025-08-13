@@ -246,6 +246,7 @@ class App {
 
 // =========
 
+
 class AxarNews {
   #isMenuOpen = false;
   #currentPage = 1;
@@ -256,7 +257,6 @@ class AxarNews {
   #activeMonth = null;
   #activeTopic = "news";
   #availabilityMap = {};
-  #allowedTopics = Object.freeze(["news", "blog"]);
 
   // DOM Elements
   #postsContainer = null;
@@ -267,49 +267,25 @@ class AxarNews {
   #backBtn = null;
 
   constructor(config = {}) {
-    // Set defaults or custom configuration
     this.#itemsPerPage = config.itemsPerPage || this.#itemsPerPage;
-
-    // DOM elements initialization
-    this.#postsContainer = document.getElementById("posts-container");
+    this.#postsContainer = document.getElementById("blog-container");
     this.#fullPostContainer = document.getElementById("fullBlogContainer");
     this.#prevBtn = document.getElementById("prev");
     this.#nextBtn = document.getElementById("next");
     this.#pageIndicator = document.getElementById("page-info");
     this.#backBtn = document.getElementById("back-button");
 
-    // Check for missing DOM elements
-    this.#checkDomElements();
-
-    // If all required DOM elements are present, setup the necessary events
-    if (this.#postsContainer && this.#fullPostContainer && this.#prevBtn && this.#nextBtn && this.#backBtn) {
-      this.#setupPaginationEvents();
-      this.#setupAccessibility();
-    } else {
-      console.warn("One or more required DOM elements are missing.");
+    if (!this.#postsContainer || !this.#fullPostContainer || !this.#prevBtn || !this.#nextBtn || !this.#pageIndicator || !this.#backBtn) {
+      console.error("One or more required DOM elements are missing.");
+      return; // Exit constructor if essential elements are missing
     }
+
+    this.#setupPaginationEvents();
+    this.#setupAccessibility();
   }
 
-  // Check for missing DOM elements and log
-  #checkDomElements() {
-    if (!this.#postsContainer) {
-      console.error("Missing DOM element: #posts-container");
-    }
-    if (!this.#fullPostContainer) {
-      console.error("Missing DOM element: #fullBlogContainer");
-    }
-    if (!this.#prevBtn) {
-      console.error("Missing DOM element: #prev");
-    }
-    if (!this.#nextBtn) {
-      console.error("Missing DOM element: #next");
-    }
-    if (!this.#backBtn) {
-      console.error("Missing DOM element: #back-button");
-    }
-  }
 
-  // Fetch availability map data
+  // Fetch the availability map (list of available years and months)
   async #fetchAvailabilityMap() {
     try {
       const res = await fetch(`/cloud/${this.#activeTopic}.json?v=${Date.now()}`);
@@ -323,50 +299,44 @@ class AxarNews {
     }
   }
 
-  // Find latest year and month data
+  // Find the latest year and month data
   async #findLatestYearMonth() {
-    const monthOrder = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+    const monthOrder = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const years = Object.keys(this.#availabilityMap).sort((a, b) => b - a);
 
     for (const year of years) {
       const months = this.#availabilityMap[year];
-      months.sort((a, b) => monthOrder.indexOf(b.toLowerCase()) - monthOrder.indexOf(a.toLowerCase()));
+      months.sort((a, b) => monthOrder.indexOf(b) - monthOrder.indexOf(a));
 
       for (const month of months) {
-        const url = `/cloud/${this.#activeTopic}/${year}/${month.toLowerCase()}/index.json?v=${Date.now()}`;
+        const url = `/cloud/${this.#activeTopic}/${year}/${month}/index.json?v=${Date.now()}`;
         try {
           const res = await fetch(url);
-          if (res.ok) return { year, month: month.toLowerCase() };
+          if (res.ok) return { year, month };
         } catch { }
       }
     }
     throw new Error("No valid year/month data found");
   }
 
-  // Load posts for the active topic
+  // Load posts and display them
   async loadPosts() {
-    if (!this.#postsContainer || !this.#fullPostContainer) return;
-
-    // Show loading spinner and hide full post view
     this.#showElement(this.#postsContainer);
     this.#showLoading(this.#postsContainer);
     this.#hideElement(this.#fullPostContainer);
     this.#hideElement(this.#backBtn);
 
     try {
-      // Fetch availability map and latest year/month data
       await this.#fetchAvailabilityMap();
       const { year, month } = await this.#findLatestYearMonth();
       this.#activeYear = year;
       this.#activeMonth = month;
 
-      // Fetch posts list
       const url = `/cloud/${this.#activeTopic}/${year}/${month}/index.json?v=${Date.now()}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error("Failed to load posts list");
 
       const data = await res.json();
-      console.log(data); // Debugging output
 
       if (!Array.isArray(data.blogList)) throw new Error("Invalid blogList data");
 
@@ -374,10 +344,6 @@ class AxarNews {
       this.#totalPosts = data.blogList.length;
       this.#currentPage = 1;
       this.#renderPosts();
-
-      const meta = document.getElementById("page-meta");
-      if (meta) meta.textContent = `Showing ${this.#activeTopic} posts from ${year}/${month}`;
-
     } catch (e) {
       console.error("Error loading posts:", e);
       this.#postsContainer.innerHTML = `<p style="color:red; text-align:center;">Failed to load posts. Please try again later.</p>`;
@@ -387,7 +353,25 @@ class AxarNews {
     }
   }
 
-  // Create a post card
+  // Render the posts on the page
+  #renderPosts() {
+    const start = (this.#currentPage - 1) * this.#itemsPerPage;
+    const end = start + this.#itemsPerPage;
+    const currentPosts = this.#posts.slice(start, end);
+
+    if (currentPosts.length === 0) {
+      this.#postsContainer.innerHTML = `<p style="text-align:center; color:#666;">No posts found.</p>`;
+      this.#pageIndicator.textContent = "";
+      this.#prevBtn.disabled = true;
+      this.#nextBtn.disabled = true;
+      return;
+    }
+
+    this.#postsContainer.innerHTML = currentPosts.map(p => this.createPostCard(p)).join("");
+    this.#updatePagination();
+  }
+
+  // Create a single post card
   createPostCard(post) {
     let media = "";
     if (post.cover) {
@@ -411,32 +395,14 @@ class AxarNews {
     `;
   }
 
-  // Render posts to the container
-  #renderPosts() {
-    const start = (this.#currentPage - 1) * this.#itemsPerPage;
-    const end = start + this.#itemsPerPage;
-    const currentPosts = this.#posts.slice(start, end);
-
-    if (currentPosts.length === 0) {
-      this.#postsContainer.innerHTML = `<p style="text-align:center; color:#666;">No posts found.</p>`;
-      this.#pageIndicator.textContent = "";
-      this.#prevBtn.disabled = true;
-      this.#nextBtn.disabled = true;
-      return;
-    }
-
-    this.#postsContainer.innerHTML = currentPosts.map(p => this.createPostCard(p)).join("");
-    this.#updatePagination();
-  }
-
-  // Update pagination controls
+  // Update the pagination
   #updatePagination() {
     this.#prevBtn.disabled = this.#currentPage === 1;
     this.#nextBtn.disabled = this.#currentPage * this.#itemsPerPage >= this.#totalPosts;
     this.#pageIndicator.textContent = `Page ${this.#currentPage} of ${Math.ceil(this.#totalPosts / this.#itemsPerPage)}`;
   }
 
-  // Open a full post
+  // Open the full post
   async openPost(path) {
     this.#showLoading(this.#fullPostContainer);
     this.#hideElement(this.#postsContainer);
@@ -457,7 +423,7 @@ class AxarNews {
     }
   }
 
-  // Go back to the posts list
+  // Go back to the post list view
   goBack() {
     this.#hideElement(this.#fullPostContainer);
     this.#showElement(this.#postsContainer);
@@ -465,7 +431,7 @@ class AxarNews {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // Setup pagination event listeners
+  // Pagination buttons event listeners
   #setupPaginationEvents() {
     if (!this.#prevBtn || !this.#nextBtn) return;
 
@@ -486,7 +452,27 @@ class AxarNews {
     });
   }
 
-  // Setup accessibility features like keyboard navigation
+  // Make the content visible again
+  #showElement(el) { if (el) el.style.display = "block"; }
+
+  // Show loading spinner
+  #showLoading(container) {
+    container.innerHTML = `
+      <div role="status" aria-live="polite" style="text-align:center; padding:2rem;">
+        <span class="spinner" aria-hidden="true"></span>
+        Loading...
+      </div>
+    `;
+  }
+
+  // Hide elements
+  #hideElement(el) { if (el) el.style.display = "none"; }
+
+  async initialize() {
+    await this.loadPosts();
+  }
+
+  // Private method for accessibility setup
   #setupAccessibility() {
     if (!this.#postsContainer) return;
 
@@ -507,39 +493,12 @@ class AxarNews {
       }
     });
   }
-
-  // Show a loading state on a container
-  #showLoading(container) {
-    if (!container) return;
-    container.innerHTML = `
-      <div role="status" aria-live="polite" style="text-align:center; padding:2rem;">
-        <span class="spinner" aria-hidden="true"></span>
-        Loading...
-      </div>
-    `;
-  }
-
-  // Hide an element
-  #hideElement(el) { if (el) el.style.display = "none"; }
-
-  // Show an element
-  #showElement(el) { if (el) el.style.display = "block"; }
-
-  // Initialize the class and load posts
-  async initialize() {
-    await this.loadPosts();
-  }
 }
 
+
 // Usage example:
-const axarnews = new AxarNews({ itemsPerPage: 3 });
-
 document.addEventListener("DOMContentLoaded", () => {
-  window.axarnews = new AxarNews(); // Make the axarnews instance global
-  axarnews.initialize();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+  const axarnews = new AxarNews({ itemsPerPage: 3 });
   axarnews.initialize();
 });
 
