@@ -167,8 +167,6 @@ body {
     padding: 1.25rem;
     width: 100%;
     color: var(--color-white);
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
 }
 
 .aboutMe figure {
