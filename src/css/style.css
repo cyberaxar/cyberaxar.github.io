@@ -246,6 +246,78 @@ body {
     user-select: none;
 }
 
+/* ================= Quote ================= */
+
+.quote {
+    min-height: 300px;
+    width: 100%;
+    margin: 1rem auto 3rem;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #eee;
+    user-select: none;
+    position: relative;
+}
+
+.quote-text {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.quote-text.fade-out {
+    opacity: 0;
+}
+
+.quote-author {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: right;
+    color: #bbb;
+}
+
+/* ========= Greeting =========== */
+.greeting {
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200;
+    /* fixed or min height to keep vertical space */
+    width: 100%;
+    text-align: center;
+    color: var(--color-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.greeting_message {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.time_message {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ccc;
+}
+
+/* Keep clock below time, smaller and subtle */
+
+.clock {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #aaa;
+}
+
+
 /* ================= Slideshow ================= */
 
 .slideshow {
