@@ -34,34 +34,34 @@ export class News {
 
     // Fetch and load the list of articles from the latest year and month
     async loadNewsData() {
-    try {
-        // Fetch metadata (2025 -> [august])
-        const newsMetaData = await this.fetchJson(`${this.cloudBasePath}${this.topic}/news.json`);
-        if (!newsMetaData || !Object.keys(newsMetaData).length) {
-            throw new Error('No metadata found.');
+        try {
+            // Fetch metadata (2025 -> [august])
+            const newsMetaData = await this.fetchJson(`${this.cloudBasePath}${this.topic}/news.json`);
+            if (!newsMetaData || !Object.keys(newsMetaData).length) {
+                throw new Error('No metadata found.');
+            }
+
+            // Get latest year and month
+            const latestYear = Object.keys(newsMetaData)[0];
+            const latestMonth = newsMetaData[latestYear][0];
+            this.currentYear = latestYear;
+            this.currentMonth = latestMonth;
+
+            // Fetch index.json for the latest year/month
+            const indexData = await this.fetchJson(`${this.cloudBasePath}${this.topic}/${latestYear}/${latestMonth}/index.json`);
+            if (!indexData || !indexData.articleList) {
+                throw new Error('No article list found in index.json.');
+            }
+
+            // Update total articles and store the articles
+            this.totalArticles = indexData.articleList.length;
+            this.articles = indexData.articleList;
+
+        } catch (error) {
+            console.error("Error loading news data:", error);
+            this.showErrorMessage("Failed to load news data. Please try again later.");
         }
-
-        // Get latest year and month
-        const latestYear = Object.keys(newsMetaData)[0];
-        const latestMonth = newsMetaData[latestYear][0];
-        this.currentYear = latestYear;
-        this.currentMonth = latestMonth;
-
-        // Fetch index.json for the latest year/month
-        const indexData = await this.fetchJson(`${this.cloudBasePath}${this.topic}/${latestYear}/${latestMonth}/index.json`);
-        if (!indexData || !indexData.articleList) {
-            throw new Error('No article list found in index.json.');
-        }
-
-        // Update total articles and store the articles
-        this.totalArticles = indexData.articleList.length;
-        this.articles = indexData.articleList;
-
-    } catch (error) {
-        console.error("Error loading news data:", error);
-        this.showErrorMessage("Failed to load news data. Please try again later.");
     }
-}
 
 
     // Display error messages to users
@@ -88,23 +88,64 @@ export class News {
         const articleElement = document.createElement('div');
         articleElement.classList.add('news-article');
 
+        // Article Title
         const articleTitle = document.createElement('h3');
         articleTitle.textContent = article.title;
 
+        // Article Summary
         const articleSummary = document.createElement('p');
         articleSummary.textContent = article.summary;
 
+        // Author Name
+        const articleAuthor = document.createElement('p');
+        articleAuthor.classList.add('article-author');
+        articleAuthor.textContent = `By ${article.author}`;
+
+        // Keywords - Displaying a list of keywords
+        const keywordsContainer = document.createElement('div');
+        keywordsContainer.classList.add('keywords');
+        article.keywords.forEach(keyword => {
+            if (keyword.type === 'text') {
+                const keywordElement = document.createElement('span');
+                keywordElement.classList.add('keyword');
+                keywordElement.textContent = keyword.text;
+                keywordsContainer.appendChild(keywordElement);
+            }
+        });
+
+        // Article Cover (Image or Video)
+        const articleCover = document.createElement('div');
+        articleCover.classList.add('article-cover');
+
+        if (article.cover && article.cover.type === 'image') {
+            const img = document.createElement('img');
+            img.src = article.cover.image.src;
+            img.alt = article.cover.image.alt;
+            articleCover.appendChild(img);
+        } else if (article.cover && article.cover.type === 'video') {
+            const video = document.createElement('video');
+            video.src = article.cover.video.src;
+            video.controls = true;
+            articleCover.appendChild(video);
+        }
+
+        // Read More Button
         const readMoreButton = document.createElement('button');
         readMoreButton.textContent = 'Read More';
         readMoreButton.classList.add('read-more-btn');
         readMoreButton.onclick = () => this.loadFullArticle(article);
 
+        // Append all elements
+        articleElement.appendChild(articleCover);
         articleElement.appendChild(articleTitle);
         articleElement.appendChild(articleSummary);
+        articleElement.appendChild(articleAuthor);
+        articleElement.appendChild(keywordsContainer);
         articleElement.appendChild(readMoreButton);
 
         return articleElement;
     }
+
 
     // Load full article content when "Read More" is clicked
     async loadFullArticle(article) {

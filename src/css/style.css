@@ -400,168 +400,95 @@ body {
 }
 
 /* =========== News ========== */
-
-/* General Styles for News Section */
-.news-article {
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(1px);
+/* News Section Styles */
+.news {
+    margin-top: 100px;
     padding: 20px;
-    margin: 20px 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.news-article {
+    width: 100%;
     border-radius: 8px;
-    /* Soft shadow to give depth */
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
 }
 
-.news-article h2 {
-    font-size: 2rem;
+.news-article:hover {
+    transform: translateY(-5px);
+}
+
+/* Cover Image */
+.article-cover {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.article-cover img {
+    width: 300px;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Title and Summary */
+.news-article h3 {
+    font-size: 1.6em;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
+    color: white;
+    padding: 15px;
+    margin: 0;
+    text-align: center;
 }
 
-.news-article .news-item {
+.news-article p {
+    font-size: 1em;
+    color: white;
+    padding: 15px;
+    margin: 0;
+    text-align: justify;
+}
+
+/* Author Name */
+.article-author {
+    font-size: 1em;
+    color: yellow;
+    padding: 10px 15px;
+    margin-top: -10px;
+    text-align: left;
+}
+
+/* Read More Button */
+.read-more-btn {
+    height: 40px;
+    width: 100px;
+    display: block;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    text-align: center;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.read-more-btn:hover {
+    background-color: yellow;
+}
+
+/* Container to hold Articles */
+#newsList {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
+    gap: 20px;
 }
 
-.news-article .news-item:hover {
-    transform: translateY(-5px);
-    /* Hover effect to lift card */
-}
+.full-article {
+    width: 100%;
 
-.news-article .news-item h3 {
-    font-size: 1.5rem;
-    color: #2c3e50;
-    margin: 0 0 10px;
-}
-
-.news-article .news-item p {
-    font-size: 1rem;
-    color: #7f8c8d;
-    margin: 0 0 15px;
-    line-height: 1.5;
-}
-
-.news-article .news-item button.read-more-button {
-    align-self: flex-start;
-    padding: 10px 20px;
-    background-color: white;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.news-article .news-item button.read-more-button:hover {
-    background-color: #2980b9;
-}
-
-.news-article .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.news-article .pagination button {
-    padding: 10px 15px;
-    margin: 0 5px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.news-article .pagination button:hover {
-    background-color: #2980b9;
-}
-
-.news-article .pagination button:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-}
-
-#fullBlogContainer {
-    display: none;
-    background-color: white;
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#back-button {
-    padding: 10px 20px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-#back-button:hover {
-    background-color: #c0392b;
-}
-
-#page-info {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #34495e;
-    margin-top: 10px;
-}
-
-/* Styling for Loading State */
-.spinner {
-    border: 4px solid #f3f3f3;
-    /* Light grey */
-    border-top: 4px solid #3498db;
-    /* Blue color for spinner */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .news-article {
-        padding: 15px;
-    }
-
-    .news-article .news-item {
-        padding: 10px;
-    }
-
-    .news-article .pagination button {
-        padding: 8px 12px;
-    }
-
-    .news-article .news-item h3 {
-        font-size: 1.2rem;
-    }
-
-    .news-article .news-item p {
-        font-size: 0.9rem;
-    }
 }
