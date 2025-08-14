@@ -42,6 +42,46 @@
           "text": "Why did I create this website?"
         }
       ]
+    },
+    {
+      "title": "Learning Game Development on Linux without a Game Engine",
+      "summary": "Learn how to get started with game development on Linux using C++, OpenGL, GLFW, and basic development tools, without relying on a game engine.",
+      "author": "Axar",
+      "path": "./cloud/news/2025/august/data/learning_game_development_linux.txt",
+      "keywords": [
+        {
+          "type": "text",
+          "text": "game development"
+        },
+        {
+          "type": "text",
+          "text": "C++"
+        },
+        {
+          "type": "text",
+          "text": "Linux"
+        },
+        {
+          "type": "text",
+          "text": "OpenGL"
+        },
+        {
+          "type": "text",
+          "text": "GLFW"
+        },
+        {
+          "type": "text",
+          "text": "game development practice"
+        },
+        {
+          "type": "text",
+          "text": "programming"
+        },
+        {
+          "type": "question",
+          "text": "How to learn game development on Linux?"
+        }
+      ]
     }
   ]
 }

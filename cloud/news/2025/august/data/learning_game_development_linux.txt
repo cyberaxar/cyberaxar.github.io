@@ -1,0 +1,47 @@
+<section>
+  <h3>Learning Game Development on Linux without a Game Engine</h3>
+  <p>Learning game development from scratch using C++ on Linux is an exciting and rewarding journey, especially if you focus on building your skills without relying on a game engine. This approach allows you to dive deeper into the fundamentals of game development and understand how things work under the hood. For this purpose, you'll use tools like the GNU C++ compiler (g++), the VSCode editor, OpenGL, and GLFW, which are powerful and lightweight libraries to handle graphics and window management.</p>
+
+  <h3>System Requirements for Linux (Ubuntu)</h3>
+  <p>Before diving into game development, make sure your system meets the necessary requirements. For Ubuntu, the latest version should be sufficient, but here are the specifics:</p>
+  <p>
+    - A 64-bit processor (preferably Intel or AMD)<br>
+    - 4 GB RAM minimum (8 GB or more is ideal)<br>
+    - A graphics card that supports OpenGL (most modern GPUs work fine)<br>
+    - At least 10 GB of free storage space for development and tools<br>
+    - A stable internet connection for downloading dependencies and libraries
+  </p>
+
+  <h3>Setting Up the Development Environment</h3>
+  <p>Start by installing the necessary software and libraries. On Ubuntu, you can easily install these via the terminal using commands. First, install the essential development tools like g++ and make:</p>
+  <pre>sudo apt update
+sudo apt install build-essential</pre>
+  <p>Next, you'll need to install GLFW for window management and input handling, and OpenGL for rendering graphics:</p>
+  <pre>sudo apt install libglfw3 libglfw3-dev libglew-dev libglm-dev</pre>
+  <p>This will ensure you have the libraries required to create windows, handle user input, and render basic 3D graphics.</p>
+
+  <h3>Setting Up VSCode</h3>
+  <p>VSCode is an excellent code editor for this purpose, as it provides a lot of features like syntax highlighting, code completion, and debugging support. You can download it from the official website or install it using the following command:</p>
+  <pre>sudo snap install code --classic</pre>
+  <p>Make sure to install the C++ extension for VSCode. This will help you manage your code and make debugging easier. You can install this directly from the Extensions marketplace inside VSCode.</p>
+
+  <h3>Writing Your First Game</h3>
+  <p>Now that you have the environment set up, it's time to write your first simple game. For practice, it's best to start small with a simple 2D game or a basic 3D object renderer. Begin by learning how to create a window with GLFW and handle basic input (such as keyboard or mouse events). Once you’re comfortable with window creation, explore rendering objects using OpenGL, which will require you to set up shaders and handle transformations.</p>
+  <p>A simple game you can make is a “ball bouncing” simulation, where you use basic physics to move the ball around the screen. You can also extend this by adding simple collision detection or creating a player-controlled object. Don't worry about making a production-ready game—focus on learning the core concepts of game development, like game loops, input handling, rendering, and simple physics calculations.</p>
+
+  <h3>Game Loop and Rendering</h3>
+  <p>The heart of any game is the game loop, which runs continuously to update the game state, render new frames, and handle input. In your case, this will look like a while loop that runs until the user closes the window. Within the loop, you’ll update game objects, process user input, and render the new game scene.</p>
+  <p>Once you have the game loop in place, it's time to focus on rendering. OpenGL can render basic shapes, and once you're comfortable with that, you can work on drawing 2D sprites or simple 3D models. Use shaders to control how objects are rendered and give them visual effects.</p>
+
+  <h3>Learning Resources</h3>
+  <p>To learn game development without a game engine, you’ll need to explore a lot of different topics. Here are some resources to help:</p>
+  <ul>
+    <li><a href="https://www.learncpp.com/">Learn C++</a> - A great resource to learn C++ programming basics.</li>
+    <li><a href="https://www.opengl-tutorial.org/">OpenGL Tutorial</a> - In-depth tutorials to learn how to use OpenGL for graphics programming.</li>
+    <li><a href="https://www.glfw.org/docs/latest/">GLFW Documentation</a> - For understanding window management and input handling in your game.</li>
+    <li><a href="https://www.gamedev.net/">GameDev.net</a> - A large community for game development, full of tutorials, forums, and resources.</li>
+  </ul>
+  
+  <h3>Next Steps in Learning</h3>
+  <p>Once you're comfortable with basic game development, you can experiment with more complex ideas like physics engines, 3D models, lighting, sound, and AI. Gradually increase the complexity of your projects as you learn more about graphics programming and C++.</p>
+</section>
