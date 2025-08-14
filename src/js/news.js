@@ -75,6 +75,10 @@ export class News {
     // Render the list of articles dynamically
     renderNewsList(articles) {
         const newsListContainer = document.getElementById('newsList');
+        if (!newsListContainer) {
+            return; // If the container doesn't exist, don't continue
+        }
+
         newsListContainer.innerHTML = ''; // Clear current list
 
         articles.forEach(article => {
@@ -83,59 +87,60 @@ export class News {
         });
     }
 
-  createArticleElement(article) {
-    const articleElement = document.createElement('div');
-    articleElement.classList.add('news-article');
 
-    // Article Title
-    const articleTitle = document.createElement('h3');
-    articleTitle.textContent = article.title;
+    createArticleElement(article) {
+        const articleElement = document.createElement('div');
+        articleElement.classList.add('news-article');
 
-    // Article Summary
-    const articleSummary = document.createElement('p');
-    articleSummary.textContent = article.summary;
+        // Article Title
+        const articleTitle = document.createElement('h3');
+        articleTitle.textContent = article.title;
 
-    // Author Name (as a clickable link)
-    const articleAuthor = document.createElement('p');
-    articleAuthor.classList.add('article-author');
-    
-    // Create the author link
-    const authorLink = document.createElement('a');
-    authorLink.href = `https://cyberaxar.github.io/home/about/about.html`;  // Link to the author's page
-    authorLink.textContent = `By ${article.author}`;  // Author's name, can be dynamically set
-    articleAuthor.appendChild(authorLink);  // Append the link to the author paragraph
+        // Article Summary
+        const articleSummary = document.createElement('p');
+        articleSummary.textContent = article.summary;
 
-    // Article Cover (Image or Video)
-    const articleCover = document.createElement('div');
-    articleCover.classList.add('article-cover');
+        // Author Name (as a clickable link)
+        const articleAuthor = document.createElement('p');
+        articleAuthor.classList.add('article-author');
 
-    if (article.cover && article.cover.type === 'image') {
-        const img = document.createElement('img');
-        img.src = article.cover.image.src;
-        img.alt = article.cover.image.alt;
-        articleCover.appendChild(img);
-    } else if (article.cover && article.cover.type === 'video') {
-        const video = document.createElement('video');
-        video.src = article.cover.video.src;
-        video.controls = true;
-        articleCover.appendChild(video);
+        // Create the author link
+        const authorLink = document.createElement('a');
+        authorLink.href = `https://cyberaxar.github.io/home/about/about.html`;  // Link to the author's page
+        authorLink.textContent = `By ${article.author}`;  // Author's name, can be dynamically set
+        articleAuthor.appendChild(authorLink);  // Append the link to the author paragraph
+
+        // Article Cover (Image or Video)
+        const articleCover = document.createElement('div');
+        articleCover.classList.add('article-cover');
+
+        if (article.cover && article.cover.type === 'image') {
+            const img = document.createElement('img');
+            img.src = article.cover.image.src;
+            img.alt = article.cover.image.alt;
+            articleCover.appendChild(img);
+        } else if (article.cover && article.cover.type === 'video') {
+            const video = document.createElement('video');
+            video.src = article.cover.video.src;
+            video.controls = true;
+            articleCover.appendChild(video);
+        }
+
+        // Read More Button
+        const readMoreButton = document.createElement('button');
+        readMoreButton.textContent = 'More';
+        readMoreButton.classList.add('read-more-btn');
+        readMoreButton.onclick = () => this.loadFullArticle(article);
+
+        // Append all elements
+        articleElement.appendChild(articleCover);
+        articleElement.appendChild(articleTitle);
+        articleElement.appendChild(articleSummary);
+        articleElement.appendChild(articleAuthor);  // Append the article author with the link
+        articleElement.appendChild(readMoreButton);
+
+        return articleElement;
     }
-
-    // Read More Button
-    const readMoreButton = document.createElement('button');
-    readMoreButton.textContent = 'More';
-    readMoreButton.classList.add('read-more-btn');
-    readMoreButton.onclick = () => this.loadFullArticle(article);
-
-    // Append all elements
-    articleElement.appendChild(articleCover);
-    articleElement.appendChild(articleTitle);
-    articleElement.appendChild(articleSummary);
-    articleElement.appendChild(articleAuthor);  // Append the article author with the link
-    articleElement.appendChild(readMoreButton);
-
-    return articleElement;
-}
 
 
 
@@ -211,7 +216,16 @@ export class News {
 
     // Attach event listeners to buttons
     attachEventListeners() {
-        document.getElementById('backButton').onclick = () => this.goBackToList();
-        document.getElementById('nextButton').onclick = () => this.loadNextPage();
+        const backButton = document.getElementById('backButton');
+        const nextButton = document.getElementById('nextButton');
+
+        // Check if the elements exist and attach event listeners only if present
+        if (backButton) {
+            backButton.addEventListener('click', () => this.goBackToList());
+        }
+
+        if (nextButton) {
+            nextButton.addEventListener('click', () => this.loadNextPage());
+        }
     }
 }
