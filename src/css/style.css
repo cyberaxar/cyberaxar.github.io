@@ -598,6 +598,63 @@ body {
 
 /* ================= Full Article ================= */
 
+
+/* =================== News Article Styles =================== */
+
+/* Styles for each article in the list */
+.news-article {
+    width: 100%;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    box-sizing: border-box;
+    /* Prevents overflow */
+    overflow: hidden;
+    /* Hides any content that exceeds the container */
+}
+
+/* Remove horizontal scroll from article */
+.news-article p,
+.news-article h3,
+.news-article a {
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    /* Ensures text wraps properly */
+    overflow-wrap: break-word;
+}
+
+/* On hover, elevate the article */
+.news-article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Cover image styles for each article */
+.article-cover {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+/* Ensure the image is responsive and doesn’t cause horizontal scrolling */
+.article-cover img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* =================== Full Article Styles =================== */
+
+/* Full article view when "Read More" is clicked */
 .full-article {
     width: 100%;
     max-width: 100%;
@@ -607,14 +664,21 @@ body {
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(2px);
+    box-sizing: border-box;
 }
 
+/* Full article paragraphs - ensures no horizontal scroll */
 .full-article p {
     line-height: 1.8;
     color: #ddd;
     margin-bottom: 20px;
+    word-wrap: break-word;
+    /* Forces text to wrap */
+    white-space: normal;
+    /* Prevents text from going out of bounds */
 }
 
+/* Full article heading style */
 .full-article h2 {
     font-size: 2em;
     font-weight: bold;
@@ -622,50 +686,40 @@ body {
     margin-bottom: 20px;
 }
 
-/* ================= Back Button inside Full Article ================= */
+/* Full article images */
+.full-article img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    object-fit: contain;
+    /* Ensures image does not overflow */
+}
 
+/* Prevent horizontal scrolling in full article */
+.full-article div,
+.full-article section {
+    overflow-x: hidden;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* ================= Back Button Styles =================== */
+
+/* Back button inside full article view */
 .full-article .read-more-btn {
     background-color: #28a745;
     margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .full-article .read-more-btn:hover {
     background-color: #218838;
 }
 
-/* ================= Responsive Design ================= */
 
-@media (max-width: 768px) {
-    .news {
-        margin-top: 60px;
-        padding: 10px;
-    }
-
-    .news-article {
-        padding: 15px;
-    }
-
-    .article-cover img {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .news-article h3 {
-        font-size: 1.4em;
-    }
-
-    .news-article p {
-        font-size: 0.9em;
-    }
-
-    .read-more-btn {
-        width: 100px;
-    }
-
-    #newsList {
-        gap: 15px;
-    }
-}
 
 /* Style for the donation section */
 .donate {
