@@ -4,11 +4,11 @@
       "title": "Welcome to My New Website",
       "summary": "Today marks the launch of my personal website! Here, I will share my journey, projects, and thoughts on programming and technology.",
       "author": "Axar",
-      "path": "./cloud/news/2025/august/data/welcome.txt",
+      "path": "/cloud/news/2025/august/data/welcome.txt",
       "cover": {
         "type": "image",
         "image": {
-          "src": "./src/pic/wallpapers/rain_1.jpg",
+          "src": "/src/pic/wallpapers/rain_1.jpg",
           "alt": "Welcome to My New Website"
         }
       },
@@ -47,7 +47,7 @@
       "title": "Learning Game Development on Linux without a Game Engine",
       "summary": "Learn how to get started with game development on Linux using C++, OpenGL, GLFW, and basic development tools, without relying on a game engine.",
       "author": "Axar",
-      "path": "./cloud/news/2025/august/data/learning_game_development_linux.txt",
+      "path": "/cloud/news/2025/august/data/learning_game_development_linux.txt",
       "keywords": [
         {
           "type": "text",

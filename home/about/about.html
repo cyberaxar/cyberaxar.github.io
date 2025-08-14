@@ -75,17 +75,17 @@
     </header>
 
     <nav class="nav" aria-label="Main Navigation">
-    <!-- Close (top-right "×") button -->
-    <button class="close-btn" onclick="app.toggleNav()" aria-label="Close Navigation">&times;</button>
+        <!-- Close (top-right "×") button -->
+        <button class="close-btn" onclick="app.toggleNav()" aria-label="Close Navigation">&times;</button>
 
-    <!-- Nav links -->
-    <a href="https://cyberaxar.github.io" class="button-link">Home</a>
-    <a href="https://cyberaxar.github.io/home/about/about.html" class="button-link">About</a>
-    <a href="https://cyberaxar.github.io/home/about/copyright.html" class="button-link">Copyright</a>
-    <a href="https://cyberaxar.github.io/home/about/privacy.html" class="button-link">Privacy</a>
-    <a href="https://cyberaxar.github.io/home/about/contact.html" class="button-link">Contact</a>
-    <p onclick="app.toggleNav()" class="button-link">Close</p> <!-- Optional extra Close link -->
-</nav>
+        <!-- Nav links -->
+        <a href="https://cyberaxar.github.io" class="button-link">Home</a>
+        <a href="https://cyberaxar.github.io/home/about/about.html" class="button-link">About</a>
+        <a href="https://cyberaxar.github.io/home/about/copyright.html" class="button-link">Copyright</a>
+        <a href="https://cyberaxar.github.io/home/about/privacy.html" class="button-link">Privacy</a>
+        <a href="https://cyberaxar.github.io/home/about/contact.html" class="button-link">Contact</a>
+        <p onclick="app.toggleNav()" class="button-link">Close</p> <!-- Optional extra Close link -->
+    </nav>
 
 
     <main class="main">
@@ -142,6 +142,16 @@
                     passion.</p>
             </section>
 
+        </article>
+        <article class="news">
+            <section class="news-list" id="newsList">
+                <!-- List of news articles will be dynamically loaded here -->
+            </section>
+            <section class="navigation">
+                <button id="backButton" class="button" style="display:none;">Back</button>
+                <div class="page-info" id="pageInfo"></div>
+                <button id="nextButton" class="button">Next</button>
+            </section>
         </article>
 
         <article class="greeting info">
