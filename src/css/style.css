@@ -220,107 +220,106 @@ body {
     }
 }
 
-/* ================= Aside ================= */
+/* ================= News Section Styles ================= */
 
-.aside {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem 0;
+.news {
+    margin-top: 80px;
 }
 
-/* ================= Footer ================= */
-
-.footer {
-    width: 100%;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    color: #eee;
-    user-select: none;
+.news a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-/* ================= Quote ================= */
-
-.quote {
-    min-height: 200px;
+/* Article Styles */
+.news-article {
     width: 100%;
-    margin: 1rem auto 3rem;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #eee;
-    user-select: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     position: relative;
 }
 
-.quote-text {
-    font-size: 1.3rem;
-    line-height: 1.6;
-    margin-bottom: 0.8rem;
-    opacity: 1;
-    transition: opacity 0.5s ease;
+.news-article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
-.quote-text.fade-out {
-    opacity: 0;
-}
-
-.quote-author {
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: right;
-    color: #bbb;
-}
-
-/* ========= Greeting =========== */
-.greeting {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* Cover Image */
+.article-cover {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.article-cover img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Title and Summary */
+.news-article h3 {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #fff;
+    padding: 10px;
     text-align: center;
-    color: var(--color-white);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    user-select: none;
-    padding: 0 1rem;
-    box-sizing: border-box;
+    margin-bottom: 10px;
+    line-height: 1.3;
 }
 
-.greeting_message {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+.news-article p {
+    font-size: 1em;
+    color: #ddd;
+    text-align: justify;
+    line-height: 1.7;
+    margin-bottom: 15px;
 }
 
-.time_message {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #ccc;
+/* Author Name */
+.article-author {
+    font-size: 1em;
+    color: #f4c542;
+    font-style: italic;
+    padding: 10px 15px;
+    margin-top: -5px;
+    text-align: left;
 }
 
-/* Keep clock below time, smaller and subtle */
-
-.clock {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    font-weight: 400;
-    color: #aaa;
+/* Navigation Bar and Page Info */
+.navigation {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
+#nextButton {
+    height: 40px;
+    width: 100px;
+}
+
+.page-info {
+    font-size: 1.2em;
+    color: #ddd;
+    text-align: center;
+}
 
 /* ================= Slideshow ================= */
 
 .slideshow {
     width: 100%;
-    margin: 2rem auto;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(1px);
     color: white;
@@ -373,7 +372,6 @@ body {
     justify-content: center;
 }
 
-
 .slide-btn.pause {
     font-size: 1.4rem;
     width: 50px;
@@ -399,86 +397,151 @@ body {
     text-align: center;
 }
 
+/* ================= Greeting ================= */
 
-/* =========== News Section Styles ========== */
-.news {
-    margin-top: 80px;
-    /* Adjusted margin for cleaner layout */
-}
+.greeting {
 
-.news a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* Article Styles */
-.news-article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-align: center;
+    color: var(--color-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.greeting_message {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.time_message {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ccc;
+}
+
+.clock {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #aaa;
+}
+
+/* ================= Quote ================= */
+
+.quote {
+    min-height: 200px;
+    width: 100%;
+    margin: 1rem auto 3rem;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(2px);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #eee;
+    user-select: none;
     position: relative;
 }
 
-.news-article:hover {
-    transform: translateY(-5px);
-    /* Subtle lift effect on hover */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+.quote-text {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+    opacity: 1;
+    transition: opacity 0.5s ease;
 }
 
-/* Cover Image */
-.article-cover {
+.quote-text.fade-out {
+    opacity: 0;
+}
+
+.quote-author {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: right;
+    color: #bbb;
+}
+
+/* ================= Footer ================= */
+
+.footer {
+    width: 100%;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #eee;
+    user-select: none;
+}
+
+/* ================= Aside ================= */
+
+.aside {
     width: 100%;
     display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
 }
+/* ================= Footer ================= */
 
-.article-cover img {
+.footer {
     width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    /* Ensures the image fills its container */
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #eee;
+    user-select: none;
 }
 
-/* Title and Summary */
-.news-article h3 {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    margin-bottom: 10px;
-    line-height: 1.3;
+/* ================= Aside ================= */
+
+.aside {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
 }
 
-.news-article p {
-    font-size: 1em;
-    color: #ddd;
-    text-align: justify;
-    line-height: 1.7;
-    margin-bottom: 15px;
+/* ================= Links Section ================= */
+
+.section.links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Author Name */
-.article-author {
-    font-size: 1em;
-    color: #f4c542;
-    /* A more professional gold tone */
-    padding: 10px 15px;
-    margin-top: -5px;
-    text-align: left;
-    font-style: italic;
+.section.links h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
 }
 
-/* Navigation Bar and Page Info */
+.section.links a {
+    text-decoration: none;
+    color: var(--color-white);
+    margin: 0.5rem 0;
+    transition: transform 0.2s ease;
+}
+
+.section.links a:hover {
+    transform: scale(1.05);
+}
+
+/* ================= Navigation & Page Info ================= */
+
 .navigation {
     height: 60px;
     width: 100%;
@@ -488,18 +551,14 @@ body {
     margin-top: 20px;
 }
 
-#nextButton {
-    height: 40px;
-    width: 100px;
-}
-
 .page-info {
     font-size: 1.2em;
     color: #ddd;
     text-align: center;
 }
 
-/* Read More Button */
+/* ================= Read More Button ================= */
+
 .read-more-btn {
     height: 40px;
     width: 100px;
@@ -528,15 +587,8 @@ body {
     box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
 }
 
-/* Container to hold Articles */
-#newsList {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
+/* ================= Full Article ================= */
 
-/* Full Article */
 .full-article {
     width: 100%;
     padding: 20px;
@@ -557,10 +609,10 @@ body {
     margin-bottom: 20px;
 }
 
-/* Back Button inside Full Article */
+/* ================= Back Button inside Full Article ================= */
+
 .full-article .read-more-btn {
     background-color: #28a745;
-    /* Green for back action */
     margin-top: 20px;
 }
 
@@ -568,7 +620,8 @@ body {
     background-color: #218838;
 }
 
-/* Responsive Design */
+/* ================= Responsive Design ================= */
+
 @media (max-width: 768px) {
     .news {
         margin-top: 60px;
