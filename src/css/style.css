@@ -93,6 +93,14 @@ body {
     z-index: 9999;
 }
 
+.close-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    height: 30px;
+    width: 30px;
+}
+
 .button-link {
     display: flex;
     align-items: center;

@@ -63,14 +63,18 @@
 </head>
 
 <body>
-    <header class="header">
-        <h1 class="title" title="copyright | Exploring Technology, Sharing Knowledge">Copyright</h1>
-        <div class="menu" role="button" aria-label="Menu" onclick="app.toggleNav()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </header>
+    <nav class="nav" aria-label="Main Navigation">
+        <!-- Close (top-right "×") button -->
+        <button class="close-btn" onclick="app.toggleNav()" aria-label="Close Navigation">&times;</button>
+
+        <!-- Nav links -->
+        <a href="https://cyberaxar.github.io" class="button-link">Home</a>
+        <a href="https://cyberaxar.github.io/home/about/about.html" class="button-link">About</a>
+        <a href="https://cyberaxar.github.io/home/about/copyright.html" class="button-link">Copyright</a>
+        <a href="https://cyberaxar.github.io/home/about/privacy.html" class="button-link">Privacy</a>
+        <a href="https://cyberaxar.github.io/home/about/contact.html" class="button-link">Contact</a>
+        <p onclick="app.toggleNav()" class="button-link">Close</p> <!-- Optional extra Close link -->
+    </nav>
 
     <nav class="nav" aria-label="Main Navigation">
         <a href="https://cyberaxar.github.io" class="button-link">Home</a>
