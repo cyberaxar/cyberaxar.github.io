@@ -657,10 +657,15 @@ body {
 
 /* Style for the donation section */
 .donate {
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(2px);
     padding: 30px;
-    margin-top: 30px;
+    margin-top: 10px;
     border-radius: 8px;
     text-align: center;
 }
@@ -696,4 +701,3 @@ body {
 .donate-button:hover {
     background-color: #0056b3;
 }
-
