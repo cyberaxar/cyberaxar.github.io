@@ -600,6 +600,10 @@ body {
 
 .full-article {
     width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    white-space: normal;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(2px);
@@ -660,20 +664,6 @@ body {
 
     #newsList {
         gap: 15px;
-    }
-
-
-    .full-article {
-        width: 100%;
-        padding: 20px;
-        background-color: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(2px);
-    }
-
-    .full-article p {
-        line-height: 1.8;
-        color: #ddd;
-        margin-bottom: 20px;
     }
 }
 
