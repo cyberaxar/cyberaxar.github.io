@@ -654,70 +654,63 @@ body {
 
 /* =================== Full Article Styles =================== */
 
-/* Full article view when "Read More" is clicked */
+/* Styles for the full article view */
 .full-article {
-    width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
-    word-wrap: break-word;
-    white-space: normal;
+    /* Adjust the width as needed */
+    margin: 0 auto;
     padding: 20px;
+    overflow: hidden;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(2px);
-    box-sizing: border-box;
+    border-radius: 8px;
+    color: white;
 }
 
-/* Full article paragraphs - ensures no horizontal scroll */
-.full-article p {
-    line-height: 1.8;
-    color: #ddd;
-    margin-bottom: 20px;
-    word-wrap: break-word;
-    /* Forces text to wrap */
+/* Ensure the article content wraps properly */
+.full-article .article-content {
+    line-height: 30px;
     white-space: normal;
-    /* Prevents text from going out of bounds */
+    /* Allow wrapping */
+    word-wrap: break-word;
+    /* Break long words */
+    overflow: hidden;
+    /* Hide any horizontal overflow */
+    text-align: justify;
+    /* Justify text */
 }
 
-/* Full article heading style */
-.full-article h2 {
-    font-size: 2em;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 20px;
-}
-
-/* Full article images */
+/* Make sure images and other elements don't break the layout */
 .full-article img {
     max-width: 100%;
+    /* Images scale with the container */
     height: auto;
-    display: block;
-    margin: 20px auto;
-    object-fit: contain;
-    /* Ensures image does not overflow */
 }
 
-/* Prevent horizontal scrolling in full article */
-.full-article div,
-.full-article section {
-    overflow-x: hidden;
-    word-wrap: break-word;
-    white-space: normal;
+.full-article pre,
+.full-article code {
+    overflow-x: auto;
+    /* Allow horizontal scrolling for code */
+    white-space: pre-wrap;
+    /* Allow wrapping for code */
 }
+
+/* Back button styling */
+.read-more-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.read-more-btn:hover {
+    background-color: #45a049;
+}
+
 
 /* ================= Back Button Styles =================== */
-
-/* Back button inside full article view */
-.full-article .read-more-btn {
-    background-color: #28a745;
-    margin-top: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.full-article .read-more-btn:hover {
-    background-color: #218838;
-}
 
 
 

@@ -146,6 +146,7 @@ export class News {
 
 
     // Load full article content when "Read More" is clicked
+    // Load full article content when "Read More" is clicked
     async loadFullArticle(article) {
         this.isListView = false; // Set to false, because we are showing the full article
         const newsListContainer = document.getElementById('newsList');
@@ -163,20 +164,23 @@ export class News {
 
             // Create a container for the full article
             const fullArticle = document.createElement('div');
-            fullArticle.classList.add('full-article');
+            fullArticle.classList.add('full-article'); // Add a class for styling
 
             // Create the "Back" button inside the article
             const backButtonInArticle = document.createElement('button');
-            backButtonInArticle.textContent = 'Back to List';
+            backButtonInArticle.textContent = 'Back';
             backButtonInArticle.classList.add('read-more-btn');
             backButtonInArticle.onclick = () => this.goBackToList(); // Go back to the list
 
             // Add the article title and content
-            fullArticle.innerHTML = `<h2>${article.title}</h2><p>${articleText}</p>`;
+            fullArticle.innerHTML = `<h2>${article.title}</h2><div class="article-content">${articleText}</div>`;
 
             // Append the "Back" button inside the article content
             fullArticle.appendChild(backButtonInArticle);
             newsListContainer.appendChild(fullArticle);
+
+            // Ensure content wraps and doesn’t overflow
+            this.applyArticleContentStyles(fullArticle);
 
         } catch (error) {
             console.error('Error loading full article:', error);
@@ -188,6 +192,18 @@ export class News {
         nextButton.style.display = 'none'; // Hide the "Next" button
         pageInfo.textContent = `Viewing: ${article.title}`; // Show page info
     }
+
+    // Apply necessary styles to ensure the content wraps properly
+    applyArticleContentStyles(fullArticle) {
+        const articleContent = fullArticle.querySelector('.article-content');
+        if (articleContent) {
+            articleContent.style.whiteSpace = 'normal';  // Allow wrapping of long text
+            articleContent.style.wordWrap = 'break-word'; // Break long words to prevent overflow
+            articleContent.style.overflow = 'hidden';    // Prevent horizontal overflow
+            articleContent.style.textAlign = 'justify';  // Optionally, justify text for better readability
+        }
+    }
+
 
 
     // Handle the "Back" button to return to the news list
