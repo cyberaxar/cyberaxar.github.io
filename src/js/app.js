@@ -6,17 +6,61 @@ class App {
   constructor() {
     this.navElement = document.querySelector(".nav");
     this.isNavOpen = false;
-    this.printCopyright();
 
+    this.initApp();
+  }
+
+  initApp = () => {
     this.initSlideshow('.slideshow');
     this.initGreetingInfo();
     this.initQuotes('.quote');
     this.initNews();
-  }
+    this.initSwipeToCloseNav();
+    this.printCopyright();
+  };
 
   toggleNav = () => {
     this.isNavOpen = !this.isNavOpen;
     this.navElement.style.width = this.isNavOpen ? "100%" : "0";
+  };
+
+  initSwipeToCloseNav = () => {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // px - Minimum swipe distance to trigger close
+    const navArea = document.body;
+
+    // Mobile touch swipe
+    navArea.addEventListener('touchstart', (e) => {
+      if (!this.isNavOpen) return;
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    navArea.addEventListener('touchend', (e) => {
+      if (!this.isNavOpen) return;
+      touchEndX = e.changedTouches[0].screenX;
+
+      const swipeDistance = touchStartX - touchEndX;
+      if (swipeDistance > swipeThreshold) {
+        this.toggleNav();
+      }
+    });
+
+    // Desktop swipe (simulated with mouse drag)
+    navArea.addEventListener('mousedown', (e) => {
+      if (!this.isNavOpen) return;
+      touchStartX = e.screenX;
+    });
+
+    navArea.addEventListener('mouseup', (e) => {
+      if (!this.isNavOpen) return;
+      touchEndX = e.screenX;
+
+      const swipeDistance = touchStartX - touchEndX;
+      if (swipeDistance > swipeThreshold) {
+        this.toggleNav();
+      }
+    });
   };
 
   printCopyright = () => {
@@ -27,7 +71,7 @@ class App {
   };
 
   initSlideshow = (containerSelector) => {
-    initSlideshow(containerSelector); // Using the initSlideshow from slide.js
+    initSlideshow(containerSelector);
   };
 
   initGreetingInfo = () => {
@@ -50,17 +94,16 @@ class App {
 
     updateGreetingAndDate();
     updateClock();
-
     setInterval(updateGreetingAndDate, 60000);
     setInterval(updateClock, 1000);
   };
 
   initQuotes = (containerSelector) => {
-    initQuotes(containerSelector); // Using the initQuotes from quote.js
+    initQuotes(containerSelector);
   };
 
   initNews = () => {
-    const news = new News(); 
+    const news = new News();
     news.initialize();
     news.attachEventListeners();
   };
