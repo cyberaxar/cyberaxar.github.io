@@ -1,4 +1,3 @@
-<section>
   <h3>Learning Game Development on Linux without a Game Engine</h3>
   <p>Learning game development from scratch using C++ on Linux is an exciting and rewarding journey, especially if you focus on building your skills without relying on a game engine. This approach allows you to dive deeper into the fundamentals of game development and understand how things work under the hood. For this purpose, you'll use tools like the GNU C++ compiler (g++), the VSCode editor, OpenGL, and GLFW, which are powerful and lightweight libraries to handle graphics and window management.</p>
 
@@ -44,4 +43,3 @@ sudo apt install build-essential</pre>
   
   <h3>Next Steps in Learning</h3>
   <p>Once you're comfortable with basic game development, you can experiment with more complex ideas like physics engines, 3D models, lighting, sound, and AI. Gradually increase the complexity of your projects as you learn more about graphics programming and C++.</p>
-</section>
